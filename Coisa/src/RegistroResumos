@@ -14,9 +14,9 @@ public class RegistroResumos {
   }
 
   public void adiciona(String tema, String conteudo) {
-    for(int i = 0; i < quantidadeResumos; i++) {
-      if(temas[i].equalsIgnoreCase(tema)) {
-        resumos[i] = tema + ": " conteudo;
+    for (int i = 0; i < quantidadeResumos; i++) {
+      if (temas[i].equalsIgnoreCase(tema)) {
+        resumos[i] = tema + ": " + conteudo;
         return;
       }
     }
@@ -24,39 +24,43 @@ public class RegistroResumos {
     temas[proximaPosicao] = tema;
     resumos[proximaPosicao] = tema + ": " + conteudo;
 
-    if(quantidadeResumos < temas.length) {
-      quantidadeResumos ++;
+    if (quantidadeResumos < temas.length) {
+      quantidadeResumos++;
     }
 
-    proximaPosicao = (proximaPosicao + 1) % temas.length
+    proximaPosicao = (proximaPosicao + 1) % temas.length;
   }
 
   public String[] pegaResumos() {
     String[] resumosAtuais = new String[quantidadeResumos];
-    for (int i = 0; i < quanridadeResumos; i++) {
-      resumosAtuais[i] = resumos[i]
+    for (int i = 0; i < quantidadeResumos; i++) {
+      resumosAtuais[i] = resumos[i];
     }
     return resumosAtuais;
   }
 
   public String imprimeResumos() {
-    String resultado = "- " + quantidadeResumos + "resumo(s) cadastrado(s)\n-"
+    String resultado = "- " + quantidadeResumos + " resumo(s) cadastrado(s)\n- ";
 
-    for(int i = 0; i < quantidadeResumos; i+) {
+    for (int i = 0; i < quantidadeResumos; i++) {
       resultado += temas[i];
-      if (i < quantidadeResumos -  1) {
+      if (i < quantidadeResumos - 1) {
         resultado += " | ";
       }
     }
     return resultado;
   }
-  public int conta() { return this.quantidadeResumos; }
 
-  public booelan temResumo(String tema) {
+  public int conta() {
+    return this.quantidadeResumos;
+  }
+
+  public boolean temResumo(String tema) {
     for (int i = 0; i < quantidadeResumos; i++) {
-      if (temas[i].equalsIgnoreCase(temas)) {
-          return true;
+      if (temas[i].equalsIgnoreCase(tema)) {
+        return true;
       }
     }
     return false;
+  }
 }
