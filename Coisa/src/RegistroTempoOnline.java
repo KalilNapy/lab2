@@ -8,32 +8,23 @@ public class RegistroTempoOnline {
     public RegistroTempoOnline(String nomeDisciplina, int tempoOnlineEsperado) {
         this.nomeDisciplina = nomeDisciplina;
         this.tempoOnlineEsperado = tempoOnlineEsperado;
-
+        this.tempoOnline = 0;
     }
 
     public RegistroTempoOnline(String nomeDisciplina) {
-        this.nomeDisciplina = nomeDisciplina;
+        this(nomeDisciplina, 120);   // confira o valor padrão no enunciado
     }
 
-    public void adicionaTempoOnline(int tempoOnline) {
-        this.tempoOnline += tempoOnline;
+    public void adicionaTempoOnline(int tempo) {
+        this.tempoOnline += tempo;
     }
 
     public boolean atingiuMetaTempoOnline() {
-        if (tempoOnline >= tempoOnlineEsperado) {
-            return true;
-        }
-        return false;
+        return this.tempoOnline >= this.tempoOnlineEsperado;
     }
 
     @Override
     public String toString() {
-        return "RegistroTempoOnline{" +
-                "nomeDisciplina='" + nomeDisciplina + '\'' +
-                ", tempoOnline=" + tempoOnline +
-                ", tempoOnlineEsperado=" + tempoOnlineEsperado +
-                '}';
+        return this.nomeDisciplina + " " + this.tempoOnline + "/" + this.tempoOnlineEsperado;
     }
-
-
 }
