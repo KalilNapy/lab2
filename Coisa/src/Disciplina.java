@@ -32,7 +32,7 @@ public class Disciplina {
     }
 
     /**
-     * Acumula as horas dedicadas ao estudo da disciplina.
+     * Acumula as horas registradas ao estudo de determinada disciplina.
      * 
      * @param horasEstudo Quantidade de horas a serem adicionadas.
      */
@@ -41,13 +41,13 @@ public class Disciplina {
     }
 
     /**
-     * Cadastra a nota do aluno em uma posição específica (de 1 a 4).
+     * Cadastra a nota do aluno em uma posição específica, de acordo com a posição que ele quer (de 1 a 4).
      * 
-     * @param numeroNota Número da nota (1 a 4).
-     * @param valorNota  Valor da nota a ser cadastrada.
+     * @param numeroNota representa o número da nota: (1 a 4).
+     * @param valorNota  Valor da nota que vai ser implementada.
      */
     public void cadastraNota(int numeroNota, double valorNota) {
-        // Subtrai 1 pois o array em Java começa no índice 0
+        // Subtrai 1 pois o array em Java começa no índice 0.
         this.notas[numeroNota - 1] = valorNota;
     }
 
@@ -73,8 +73,8 @@ public class Disciplina {
         return calculaMedia() >= 7.0;
     }
 
-    /**
-     * Retorna a representação em String da disciplina.
+    /*
+     * Retorna em forma de String a disciplina.
      */
     @Override
     public String toString() {
