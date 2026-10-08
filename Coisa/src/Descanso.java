@@ -1,4 +1,10 @@
 package lab2;
+/**
+ * Representa o descanso de um estudante qualquer (horas descansadas)
+ * e os metodos que buscam julgar se um estudante está cansado ou descansado.
+ *
+ * @author Kalil De Oliveira Napy
+ */
 
 public class Descanso {
     private int horasDescanso;
