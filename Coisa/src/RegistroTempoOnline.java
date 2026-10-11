@@ -1,67 +1,57 @@
 package lab2;
 
 /**
- * Registro de tempo online dedicado a uma disciplina.
+ * Gerencia o tempo de estudo dedicado online para uma disciplina.
  * 
  * @author Kalil de Oliveira Napy
  */
 public class RegistroTempoOnline {
 
-    /** Guardar o nome da disciplina */
     private String nomeDisciplina;
+    private int tempoPlanejado;
+    private int tempoGasto;
 
-    /** Guardar o tempo online que foi dedicado */
-    private int tempoOnline;
-
-    /** Tempo online que era esperado a ser dedicado */
-    private int tempoOnlineEsperado;
-
-    /** 
-     * Construtor que recebe o nome da disciplina e o tempo esperado por ela
+    /**
+     * Constroi o registro com 120 horas planejadas por padrao.
      * 
-     * @param nomeDisciplina o nome da disciplina
-     * @param tempoOnlineEsperado a quantidade de horas esperadas
-     */
-    public RegistroTempoOnline(String nomeDisciplina, int tempoOnlineEsperado) {
-        this.nomeDisciplina = nomeDisciplina;
-        this.tempoOnlineEsperado = tempoOnlineEsperado;
-        this.tempoOnline = 0;
-    }
-
-    /** 
-     * Construtor que recebe o nome da disciplina e define 120 horas como o esperado
-     * 
-     * @param nomeDisciplina o nome da disciplina
+     * @param nomeDisciplina nome da disciplina
      */
     public RegistroTempoOnline(String nomeDisciplina) {
         this(nomeDisciplina, 120);
     }
 
-    /** 
-     * Metodo para adicionar mais tempo no tempoOnline
+    /**
+     * Constroi o registro com tempo planejado especifico.
      * 
-     * @param tempo quantidade de horas a adicionar
+     * @param nomeDisciplina nome da disciplina
+     * @param tempoOnlineEsperado tempo em horas planejado
      */
-    public void adicionaTempoOnline(int tempo) {
-        this.tempoOnline += tempo;
-    }
-
-    /** 
-     * Metodo que verifica se atingiu o tempo esperado ou não
-     * 
-     * @return true se atingiu ou ultrapassou a meta, false caso contrario
-     */
-    public boolean atingiuMetaTempoOnline() {
-        return this.tempoOnline >= this.tempoOnlineEsperado;
+    public RegistroTempoOnline(String nomeDisciplina, int tempoOnlineEsperado) {
+        this.nomeDisciplina = nomeDisciplina;
+        this.tempoPlanejado = tempoOnlineEsperado;
+        this.tempoGasto = 0;
     }
 
     /**
-     * Retorna a representacao em String do registro de tempo online.
+     * Adiciona tempo gasto de estudo.
      * 
-     * @return a representacao no formato "DISCIPLINA GASTO/ESPERADO"
+     * @param tempo horas dedicadas
      */
+    public void adicionaTempoOnline(int tempo) {
+        this.tempoGasto += tempo;
+    }
+
+    /**
+     * Verifica se a meta de tempo online foi atingida.
+     * 
+     * @return true se atingiu o tempo planejado, false caso contrario
+     */
+    public boolean atingoMetaTempoOnline() {
+        return this.tempoGasto >= this.tempoPlanejado;
+    }
+
     @Override
     public String toString() {
-        return this.nomeDisciplina + " " + this.tempoOnline + "/" + this.tempoOnlineEsperado;
+        return this.nomeDisciplina + " " + this.tempoGasto + "/" + this.tempoPlanejado;
     }
 }
