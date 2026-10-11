@@ -21,7 +21,7 @@ public class Disciplina {
     private double[] notas;
 
     /**
-     * Constrói a disciplina definindo seu nome e inicializando o array de 4 notas.
+     * Constrói a disciplina definindo seu nome e o array de 4 notas.
      * 
      * @param nomeDisciplina O nome da disciplina.
      */
@@ -34,10 +34,10 @@ public class Disciplina {
     /**
      * Acumula as horas registradas ao estudo de determinada disciplina.
      * 
-     * @param horasEstudo Quantidade de horas a serem adicionadas.
+     * @param horasEstudo quantidade de horas a serem adicionadas.
      */
     public void cadastraHoras(int horasEstudo) {
-        this.horasEstudo += horasEstudo; // Soma com as horas já cadastradas
+        this.horasEstudo += horasEstudo;
     }
 
     /**
@@ -47,15 +47,9 @@ public class Disciplina {
      * @param valorNota  Valor da nota que vai ser implementada.
      */
     public void cadastraNota(int numeroNota, double valorNota) {
-        // Subtrai 1 pois o array em Java começa no índice 0.
         this.notas[numeroNota - 1] = valorNota;
     }
 
-    /**
-     * Calcula a média das 4 notas.
-     * 
-     * @return a média calculada.
-     */
     private double calculaMedia() {
         double soma = 0;
         for (double nota : this.notas) {
@@ -73,12 +67,9 @@ public class Disciplina {
         return calculaMedia() >= 7.0;
     }
 
-    /*
-     * Retorna em forma de String a disciplina.
-     */
     @Override
     public String toString() {
         return this.nomeDisciplina + " " + this.horasEstudo + " "
-               + calculaMedia() + " " + Arrays.toString(this.notas);
+                + calculaMedia() + " " + Arrays.toString(this.notas);
     }
 }
