@@ -1,66 +1,111 @@
 package lab2;
 
+/**
+ * Registra e gerencia resumos de estudos com limite fixo.
+ * 
+ * @author Kalil De Oliveira Napy
+ */
 public class RegistroResumos {
-  private String[] temas;
-  private String[] resumos;
-  private int quantidadeResumos;
-  private int proximaPosicao;
 
-  public RegistroResumos(int numeroDeResumos) {
-    this.temas = new String[numeroDeResumos];
-    this.resumos = new String[numeroDeResumos];
-    this.quantidadeResumos = 0;
-    this.proximaPosicao = 0;
-  }
+    /** Array para guardar os temas dos resumos */
+    private String[] temas;
 
-  public void adiciona(String tema, String conteudo) {
-    for (int i = 0; i < quantidadeResumos; i++) {
-      if (temas[i].equalsIgnoreCase(tema)) {
-        resumos[i] = tema + ": " + conteudo;
-        return;
-      }
+    /** Array para guardar o texto dos resumos no formato "Tema: Conteudo" */
+    private String[] resumos;
+
+    /** Quantidade atual de resumos armazenados */
+    private int quantidadeResumos;
+
+    /** Posição do array onde o próximo resumo será gravado */
+    private int proximaPosicao;
+
+    /**
+     * Constrói o registro de resumos com um limite máximo.
+     * 
+     * @param numeroDeResumos a capacidade máxima de resumos
+     */
+    public RegistroResumos(int numeroDeResumos) {
+        this.temas = new String[numeroDeResumos];
+        this.resumos = new String[numeroDeResumos];
+        this.quantidadeResumos = 0;
+        this.proximaPosicao = 0;
     }
 
-    temas[proximaPosicao] = tema;
-    resumos[proximaPosicao] = tema + ": " + conteudo;
+    /**
+     * Adiciona um novo resumo ou atualiza caso o tema já exista.
+     * 
+     * @param tema o tema do resumo
+     * @param conteudo o texto descritivo do resumo
+     */
+    public void adiciona(String tema, String conteudo) {
+        for (int i = 0; i < this.quantidadeResumos; i++) {
+            if (this.temas[i].equalsIgnoreCase(tema)) {
+                this.resumos[i] = tema + ": " + conteudo;
+                return;
+            }
+        }
 
-    if (quantidadeResumos < temas.length) {
-      quantidadeResumos++;
+        this.temas[this.proximaPosicao] = tema;
+        this.resumos[this.proximaPosicao] = tema + ": " + conteudo;
+
+        if (this.quantidadeResumos < this.temas.length) {
+            this.quantidadeResumos++;
+        }
+
+        this.proximaPosicao = (this.proximaPosicao + 1) % this.temas.length;
     }
 
-    proximaPosicao = (proximaPosicao + 1) % temas.length;
-  }
-
-  public String[] pegaResumos() {
-    String[] resumosAtuais = new String[quantidadeResumos];
-    for (int i = 0; i < quantidadeResumos; i++) {
-      resumosAtuais[i] = resumos[i];
+    /**
+     * Retorna uma cópia do array contendo apenas os resumos cadastrados.
+     * 
+     * @return array de String com os resumos
+     */
+    public String[] pegaResumos() {
+        String[] resumosAtuais = new String[this.quantidadeResumos];
+        for (int i = 0; i < this.quantidadeResumos; i++) {
+            resumosAtuais[i] = this.resumos[i];
+        }
+        return resumosAtuais;
     }
-    return resumosAtuais;
-  }
 
-  public String imprimeResumos() {
-    String resultado = "- " + quantidadeResumos + " resumo(s) cadastrado(s)\n- ";
+    /**
+     * Retorna a listagem formatada dos resumos cadastrados.
+     * 
+     * @return String formatada com o total e os temas
+     */
+    public String imprimeResumos() {
+        String resultado = "- " + this.quantidadeResumos + " resumo(s) cadastrado(s)\n- ";
 
-    for (int i = 0; i < quantidadeResumos; i++) {
-      resultado += temas[i];
-      if (i < quantidadeResumos - 1) {
-        resultado += " | ";
-      }
+        for (int i = 0; i < this.quantidadeResumos; i++) {
+            resultado += this.temas[i];
+            if (i < this.quantidadeResumos - 1) {
+                resultado += " | ";
+            }
+        }
+        return resultado;
     }
-    return resultado;
-  }
 
-  public int conta() {
-    return this.quantidadeResumos;
-  }
-
-  public boolean temResumo(String tema) {
-    for (int i = 0; i < quantidadeResumos; i++) {
-      if (temas[i].equalsIgnoreCase(tema)) {
-        return true;
-      }
+    /**
+     * Retorna a quantidade de resumos cadastrados.
+     * 
+     * @return total de resumos
+     */
+    public int conta() {
+        return this.quantidadeResumos;
     }
-    return false;
-  }
+
+    /**
+     * Verifica se existe algum resumo cadastrado para o tema informado.
+     * 
+     * @param tema o tema a ser pesquisado
+     * @return true se o resumo existir, false caso contrario
+     */
+    public boolean temResumo(String tema) {
+        for (int i = 0; i < this.quantidadeResumos; i++) {
+            if (this.temas[i].equalsIgnoreCase(tema)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
