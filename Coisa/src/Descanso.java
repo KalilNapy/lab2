@@ -1,40 +1,43 @@
 package lab2;
 
 /**
- * Representa o descanso de um estudante qualquer (horas descansadas)
- * e os metodos que buscam julgar se um estudante está cansado ou descansado.
- *
- * @author Kalil De Oliveira Napy
+ * Controla e avalia a rotina de descanso do estudante.
+ * 
+ * @author Kalil de Oliveira Napy
  */
 public class Descanso {
 
-    /** Total de horas acumuladas de descanso */
     private int horasDescanso;
-
-    /** Numero de semanas contabilizadas */
     private int numeroSemanas;
 
     /**
-     * Serve para registrar as horas de descanso.
-     * 
-     * @param horasDescanso o total de horas descansadas
+     * Inicializa a rotina de descanso.
      */
-    public void defineHorasDescanso(int horasDescanso) {
-        this.horasDescanso = horasDescanso;
+    public Descanso() {
+        this.horasDescanso = 0;
+        this.numeroSemanas = 0;
     }
 
     /**
-     * Serve para registrar o numero de semanas.
+     * Define as horas de descanso.
      * 
-     * @param numeroSemanas a quantidade de semanas
+     * @param valor quantidade de horas
      */
-    public void defineNumeroSemanas(int numeroSemanas) {
-        this.numeroSemanas = numeroSemanas;
+    public void defineHorasDescanso(int valor) {
+        this.horasDescanso = valor;
     }
 
     /**
-     * Condição para o aluno que registrou as informações: se a quantidade de horas descansadas dividido pelo numero de semanas for
-     * igual ou superior a 26, ele está descansado, caso contrário, é dado como cansado
+     * Define o numero de semanas.
+     * 
+     * @param valor quantidade de semanas
+     */
+    public void defineNumeroSemanas(int valor) {
+        this.numeroSemanas = valor;
+    }
+
+    /**
+     * Verifica o status de descanso do aluno.
      * 
      * @return "descansado" ou "cansado"
      */
@@ -42,7 +45,9 @@ public class Descanso {
         if (this.numeroSemanas == 0) {
             return "cansado";
         }
-        if ((double) this.horasDescanso / this.numeroSemanas >= 26) {
+
+        int mediaHoras = this.horasDescanso / this.numeroSemanas;
+        if (mediaHoras >= 26) {
             return "descansado";
         }
         return "cansado";
