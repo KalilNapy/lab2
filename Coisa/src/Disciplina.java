@@ -3,73 +3,106 @@ package lab2;
 import java.util.Arrays;
 
 /**
- * Representa uma disciplina em que o estudante está cursando.
- * Cada disciplina possui nome, horas de estudo acumuladas,
- * quatro notas e o cálculo da média a ser realizado.
- *
- * @author Kalil De Oliveira Napy
+ * Guarda as informacoes de uma disciplina,
+ * como nome, horas de estudo, notas e media.
+ * 
+ * @author Kalil de Oliveira Napy
  */
 public class Disciplina {
 
-    /** Nome da disciplina. */
     private String nomeDisciplina;
-
-    /** Horas totais de estudo da disciplina. */
     private int horasEstudo;
-
-    /** Array criado com o intuito de armazenar as 4 notas registradas pelo aluno. */
     private double[] notas;
+    private double media;
+    private int[] pesos;
 
     /**
-     * Constrói a disciplina definindo seu nome e o array de 4 notas.
+     * Construtor para disciplina com 4 notas.
      * 
-     * @param nomeDisciplina O nome da disciplina.
+     * @param nomeDisciplina o nome da disciplina
      */
     public Disciplina(String nomeDisciplina) {
+        this(nomeDisciplina, 4);
+    }
+
+    /**
+     * Construtor com quantidade de notas personalizada.
+     * 
+     * @param nomeDisciplina o nome da disciplina
+     * @param numNotas quantidade de notas
+     */
+    public Disciplina(String nomeDisciplina, int numNotas) {
         this.nomeDisciplina = nomeDisciplina;
         this.horasEstudo = 0;
-        this.notas = new double[4];
-    }
+        this.notas = new double[numNotas];
+        this.media = 0.0;
+        this.pesos = new int[numNotas];
 
-    /**
-     * Acumula as horas registradas ao estudo de determinada disciplina.
-     * 
-     * @param horasEstudo quantidade de horas a serem adicionadas.
-     */
-    public void cadastraHoras(int horasEstudo) {
-        this.horasEstudo += horasEstudo;
-    }
-
-    /**
-     * Cadastra a nota do aluno em uma posição específica, de acordo com a posição que ele quer (de 1 a 4).
-     * 
-     * @param numeroNota representa o número da nota: (1 a 4).
-     * @param valorNota  Valor da nota que vai ser implementada.
-     */
-    public void cadastraNota(int numeroNota, double valorNota) {
-        this.notas[numeroNota - 1] = valorNota;
-    }
-
-    private double calculaMedia() {
-        double soma = 0;
-        for (double nota : this.notas) {
-            soma += nota;
+        for (int i = 0; i < numNotas; i++) {
+            this.pesos[i] = 1;
         }
-        return soma / this.notas.length;
     }
 
     /**
-     * Verifica se o aluno foi aprovado.
+     * Construtor com pesos especificos para media ponderada.
      * 
-     * @return true se aprovado, false caso seja reprovado
+     * @param nomeDisciplina o nome da disciplina
+     * @param numNotas quantidade de notas
+     * @param pesosNotas array com os pesos
+     */
+    public Disciplina(String nomeDisciplina, int numNotas, int[] pesosNotas) {
+        this.nomeDisciplina = nomeDisciplina;
+        this.horasEstudo = 0;
+        this.notas = new double[numNotas];
+        this.media = 0.0;
+        this.pesos = pesosNotas;
+    }
+
+    /**
+     * Adiciona horas de estudo.
+     * 
+     * @param horas quantidade de horas
+     */
+    public void cadastraHoras(int horas) {
+        this.horasEstudo += horas;
+    }
+
+    /**
+     * Registra uma nota e atualiza a media.
+     * 
+     * @param nota posicao da nota
+     * @param valorNota valor da nota
+     */
+    public void cadastraNota(int nota, double valorNota) {
+        this.notas[nota - 1] = valorNota;
+
+        double soma = 0.0;
+        int somaPesos = 0;
+
+        for (int i = 0; i < notas.length; i++) {
+            soma += notas[i] * pesos[i];
+            somaPesos += pesos[i];
+        }
+
+        if (somaPesos != 0) {
+            media = soma / somaPesos;
+        } else {
+            media = 0.0;
+        }
+    }
+
+    /**
+     * Retorna se a media e pelo menos 7.
+     * 
+     * @return true se aprovado, false se reprovado
      */
     public boolean aprovado() {
-        return calculaMedia() >= 7.0;
+        return media >= 7.0;
     }
 
     @Override
     public String toString() {
-        return this.nomeDisciplina + " " + this.horasEstudo + " "
-                + calculaMedia() + " " + Arrays.toString(this.notas);
+        return nomeDisciplina + " " + horasEstudo + " " 
+                + media + " " + Arrays.toString(notas);
     }
 }
